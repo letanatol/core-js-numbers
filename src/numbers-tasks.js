@@ -200,12 +200,19 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
+  if (n <= 1) {
+    return false;
+  }
+
   if (n === 2) {
     return true;
   }
 
-  // eslint-disable-next-line no-plusplus
-  for (let i = 2; i <= Math.sqrt(n); i++) {
+  if (n % 2 === 0) {
+    return false;
+  }
+
+  for (let i = 3; i <= Math.sqrt(n); i += 2) {
     if (n % i === 0) return false;
   }
 
@@ -565,9 +572,8 @@ function getIntegerPartNumber(number) {
  * 1, 2, 3       => 6
  * 0.1, 0.2, 0.3 => 0.6
  */
-function getSumOfNumbers() {
-  // eslint-disable-next-line prefer-rest-params
-  return [...arguments].reduce((sum, el) => sum + el, 0).toFixed(1);
+function getSumOfNumbers(...args) {
+  return args.reduce((sum, el) => sum + el, 0).toFixed(1);
 }
 
 /**
@@ -633,7 +639,6 @@ function getCountOfOddNumbers(number) {
   let sum = 0;
   for (let i = 1; i <= Math.abs(number); i += 1) {
     if (i % 2 !== 0) {
-      // eslint-disable-next-line no-unused-vars
       sum += 1;
     }
   }
